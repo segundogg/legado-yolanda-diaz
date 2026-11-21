@@ -11,7 +11,9 @@ Portal informativo sobre los efectos de las políticas del Ministerio de Trabajo
 
 Se publica con GitHub Pages desde la rama `main`, carpeta raíz (`/`).
 
-Antes de publicar, sustituye `TU-USUARIO` (y el nombre del repositorio si es otro) en las etiquetas `og:url`, `og:image` y `twitter:image` de `index.html`: las redes sociales necesitan la dirección completa de la imagen.
+Dirección: https://segundogg.github.io/legado-yolanda-diaz/
+
+Si el repositorio cambia de nombre, actualiza las etiquetas `og:url`, `og:image` y `twitter:image` de `index.html`: las redes sociales necesitan la dirección completa de la imagen.
 
 ## Fuentes
 
