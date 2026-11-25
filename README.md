@@ -11,7 +11,7 @@ Portal informativo sobre los efectos de las políticas del Ministerio de Trabajo
 
 Se publica con GitHub Pages desde la rama `main`, carpeta raíz (`/`).
 
-Dirección: https://datosdeyolanda.es/
+Dirección: https://levoyadarundato.es/
 
 Si cambia el dominio, actualiza también el archivo `CNAME` y las etiquetas `og:url`, `og:image` y `twitter:image` de `index.html`: las redes sociales necesitan la dirección completa de la imagen.
 
