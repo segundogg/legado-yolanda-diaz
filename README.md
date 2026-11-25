@@ -1,4 +1,4 @@
-# El legado de Yolanda Díaz, Ministra de Trabajo
+# Los datos de Yolanda Díaz, Ministra de Trabajo
 
 Portal informativo sobre los efectos de las políticas del Ministerio de Trabajo y Economía Social (2020–2026): empleo, reforma laboral, paro y protección, SMI y salarios, permisos, desigualdad y desglose por comunidades autónomas.
 
