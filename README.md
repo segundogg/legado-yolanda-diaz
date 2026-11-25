@@ -11,13 +11,13 @@ Portal informativo sobre los efectos de las políticas del Ministerio de Trabajo
 
 Se publica con GitHub Pages desde la rama `main`, carpeta raíz (`/`).
 
-Dirección: https://segundogg.github.io/legado-yolanda-diaz/
+Dirección: https://datosdeyolanda.es/
 
-Si el repositorio cambia de nombre, actualiza las etiquetas `og:url`, `og:image` y `twitter:image` de `index.html`: las redes sociales necesitan la dirección completa de la imagen.
+Si cambia el dominio, actualiza también el archivo `CNAME` y las etiquetas `og:url`, `og:image` y `twitter:image` de `index.html`: las redes sociales necesitan la dirección completa de la imagen.
 
 ## Fuentes
 
-INE (EPA, ECV, ETCL, Contabilidad Nacional), Ministerio de Trabajo y Economía Social, Ministerio de Inclusión, Seguridad Social y Migraciones, SEPE, Eurostat y BOE. Fichas territoriales del Ministerio de Trabajo con datos hasta el 3T 2026.
+INE (EPA, ECV, ETCL, Contabilidad Nacional), Ministerio de Trabajo y Economía Social, Ministerio de Inclusión, Seguridad Social y Migraciones, SEPE, Eurostat y BOE.
 
 ## Créditos
 
