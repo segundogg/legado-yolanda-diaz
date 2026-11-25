@@ -189,6 +189,9 @@ td.n,th.n{text-align:right;white-space:nowrap}
 th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;position:sticky;top:0;background:#fff}
 .eras{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted)}
 .eras span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:2px;background:var(--c);vertical-align:-1px;margin-right:5px}
+.legend-inline .sw2::before{content:"";display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:linear-gradient(90deg,var(--c) 50%,var(--d) 50%)}
+.legend-inline .sw2::after{display:none}.legend-inline span.sw2::before{height:12px}
+.legend-inline small{color:var(--muted)}
 .legend-inline{display:flex;gap:14px;font-size:12.5px;color:var(--ink);flex-wrap:wrap}
 .legend-inline span::before{content:"";display:inline-block;width:14px;height:3px;border-radius:2px;background:var(--c);vertical-align:middle;margin-right:6px}
 .statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:22px}
@@ -210,13 +213,23 @@ th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mu
 .st{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:3px;white-space:nowrap;font-weight:700}
 .st.m{background:var(--gain-bg);color:var(--gain)} .st.s{background:var(--panel-2);color:var(--ink)} .st.x{background:var(--cost-bg);color:var(--cost)}
 
+/* Pendiente */
+#pendiente .subh{font-size:clamp(28px,4.2vw,46px);line-height:1.05;margin-bottom:8px}
+#pendiente .lead{font-size:clamp(18px,2.2vw,24px);line-height:1.3;color:var(--verm-ink);margin:0 0 20px}
+.pend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.pcard{background:#fff;border:1px solid var(--line);border-top:4px solid var(--cost);border-radius:8px;padding:18px 20px;display:grid;gap:8px;align-content:start}
+section.readsec:nth-of-type(even) .pcard{background:#fff}
+.pcard h3{font-family:var(--f-display);font-weight:800;font-size:20px;line-height:1.1;margin:0}
+.pcard p{margin:0;font-size:14.5px;line-height:1.5}
+.pcard .st{justify-self:start}
 /* Pie */
-.site-foot{margin-top:20px;border-top:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:12.5px;line-height:1.55}
+.site-foot{margin-top:0;border-top:0;background:var(--verm);color:#FFE9E3!important;color:var(--muted);font-size:12.5px;line-height:1.55}
 .site-foot .wrap{padding-block:24px 32px}
 .site-foot .foot-lead{margin:0 0 12px;color:var(--ink);font-family:var(--f-display);font-weight:800;font-size:22px;line-height:1.1}
-.site-foot .foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.site-foot .foot-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
 .site-foot .foot-cols p{margin:0}
-.site-foot strong{color:var(--ink)}
+.site-foot strong{color:var(--lime)}
+.site-foot a{color:#fff}
 @media (max-width:760px){.site-foot .foot-cols{grid-template-columns:1fr;gap:10px}}
 
 /* Barra inferior móvil */
@@ -331,6 +344,7 @@ section.readsec:nth-of-type(even) .rank .rr:hover{background:#fff}
     <div class="charts">
       <figure class="chart" id="c-paro"></figure>
       <figure class="chart" id="c-cob"></figure>
+      <figure class="chart" id="c-crisis"></figure>
       <figure class="chart" id="c-erte"></figure>
     </div>
   </div>
@@ -340,7 +354,7 @@ section.readsec:nth-of-type(even) .rank .rr:hover{background:#fff}
     <div class="sec-h">
       <div class="kicker">Más SMI y salarios</div>
       <h2>De 735,90 € a 1.286 €: el salario mínimo sube un 75%</h2>
-      <p class="lead">El Real Decreto 1013/2026, publicado en el BOE el 19 de noviembre, fija el SMI de 2027 en 1.286 € al mes en 14 pagas (18.004 € al año), un 5,3% más. Desde 2018 son 550 € más al mes y 7.701 € más al año. Beneficia sobre todo a las mujeres, que son dos de cada tres beneficiarios, a los jóvenes y a quienes trabajan en el campo y los servicios. Entre 2018 y 2024 el salario del 10% peor pagado creció un 48%, más del doble que la media.</p>
+      <p class="lead">El Real Decreto 1013/2026, publicado en el BOE el 19 de noviembre, fija el SMI de 2027 en 1.286 € al mes en 14 pagas (18.004 € al año), un 5,3% más. Desde 2018 son 550 € más al mes y 7.701 € más al año. Beneficia sobre todo a las mujeres, que son dos de cada tres beneficiarios, a los jóvenes y a quienes trabajan en el campo y los servicios. El salario medio llega a 2.497,2 € al mes en 2025, tras nueve años seguidos de subida. Entre 2018 y 2025, el del 10% peor pagado creció un 47,8%, más del doble que la inflación acumulada (22,5%): un 20,6% más en términos reales, frente al 4,8% de la media.</p>
     </div>
     <div class="statrow">
       <div class="stat lime"><b>1.286 €</b><span>SMI 2027, en 14 pagas</span><small>18.004 € al año. Equivale a 1.500 € en 12 pagas</small></div>
@@ -353,9 +367,9 @@ section.readsec:nth-of-type(even) .rank .rr:hover{background:#fff}
       <figure class="chart" id="c-smiccaa"></figure>
       <figure class="chart" id="c-smimuj"></figure>
       <figure class="chart" id="c-smisexo"></figure>
-      <figure class="chart" id="c-smiedad"></figure>
-      <figure class="chart" id="c-smisector"></figure>
+      <figure class="chart" id="c-salmedio"></figure>
       <figure class="chart" id="c-deciles"></figure>
+      <figure class="chart" id="c-salreal"></figure>
     </div>
   </div>
 </section>
@@ -365,12 +379,12 @@ section.readsec:nth-of-type(even) .rank .rr:hover{background:#fff}
   <div class="wrap">
     <div class="sec-h">
       <div class="kicker">Más permisos</div>
-      <h2>Permisos por nacimiento: de 13 días a 19 semanas para los padres</h2>
-      <p class="lead">El Real Decreto-ley 9/2025, impulsado por el Ministerio de Trabajo, amplió el permiso a 19 semanas retribuidas por progenitor: 17 semanas más 2 para el cuidado hasta que el menor cumpla 8 años. En familias monoparentales llega a 32 semanas.</p>
+      <h2>De 13 días a 20 semanas de permiso por nacimiento, y 10 días de duelo</h2>
+      <p class="lead">El Real Decreto-ley 9/2025 amplió el permiso por nacimiento a 19 semanas por progenitor: 17 más 2 para el cuidado hasta que el menor cumpla 8 años. El Real Decreto-ley 42/2026, publicado el 25 de noviembre, lo eleva a 20 semanas (34 en familias monoparentales) y amplía el permiso por fallecimiento de 2 a 10 días laborables, sin cambios desde 1980.</p>
     </div>
     <div class="charts">
       <figure class="chart" id="c-perm-tot"></figure>
-      <figure class="chart" id="c-perm-pad"></figure>
+      <figure class="chart" id="c-duelo"></figure>
     </div>
   </div>
 </section>
@@ -445,15 +459,49 @@ section.readsec:nth-of-type(even) .rank .rr:hover{background:#fff}
         <tbody id="normas-b"></tbody>
       </table>
     </div>
+    <div class="subsec" id="pendiente">
+      <h3 class="subh">Lo que seguiremos intentando</h3>
+      <p class="lead"><strong>Vota este 29N para que se haga realidad en la próxima legislatura.</strong></p>
+    <div class="pend">
+      <article class="pcard">
+        <span class="st x">Tumbada en el Congreso</span>
+        <h3>Jornada de 37,5 horas sin bajar el sueldo</h3>
+        <p>Habría beneficiado a 12,5 millones de personas. <strong>PP, Vox y Junts</strong> la tumbaron en septiembre de 2025 sin dejarla debatir.</p>
+      </article>
+      <article class="pcard">
+        <span class="st x">Bloqueada en el Gobierno</span>
+        <h3>Registro de jornada digital</h3>
+        <p>Para que se paguen todas las horas trabajadas. Lleva un año listo, pero <strong>el ala socialista no lo llevó al Consejo de Ministros</strong>.</p>
+      </article>
+      <article class="pcard">
+        <span class="st x">Bloqueada en el Gobierno</span>
+        <h3>Que los pluses no se coman la subida del SMI</h3>
+        <p>Para que cada subida llegue íntegra a la nómina. <strong>Economía se resistió</strong> y la reforma se aplazó a 2027.</p>
+      </article>
+      <article class="pcard">
+        <span class="st x">Frenada en el Congreso</span>
+        <h3>Estatuto del Becario</h3>
+        <p>Pactado con los sindicatos para acabar con las prácticas que encubren empleo. <strong>El PNV presentó una enmienda a la totalidad</strong> y quedó congelado tras 18 prórrogas del plazo de enmiendas.</p>
+      </article>
+      <article class="pcard">
+        <span class="st x">Bloqueada en el Gobierno</span>
+        <h3>Despido que repare y disuada</h3>
+        <p>La indemnización tasada (33 días por año, tope de 24 mensualidades desde 2012) vulnera el art. 24 de la Carta Social Europea, según el Comité Europeo de Derechos Sociales. Trabajo propuso ajustarla al daño real; <strong>Economía la frenó</strong>.</p>
+      </article>
+      <article class="pcard">
+        <span class="st x">En diálogo social</span>
+        <h3>Democracia en el trabajo</h3>
+        <p>Que los trabajadores tengan voz en los consejos de administración, como en 18 países de la UE. <strong>La CEOE se negó a negociar</strong> y la ley no llegó a aprobarse.</p>
+      </article>
+    </div>
+    </div>
   </div>
 </section>
 
 <footer class="site-foot">
   <div class="wrap">
-    <p class="foot-lead">Ficha resumen</p>
-    <div class="foot-cols">
+        <div class="foot-cols">
       <p><strong>Fuentes.</strong> INE (Encuesta de Población Activa, Encuesta de Condiciones de Vida, Encuesta Trimestral de Coste Laboral, Contabilidad Nacional), Ministerio de Trabajo y Economía Social, Ministerio de Inclusión, Seguridad Social y Migraciones, SEPE, Eurostat y BOE.</p>
-      <p><strong>Periodos.</strong> Empleo, paro y contratos: 4T 2019 frente al 3T 2026 (EPA). Reforma laboral: 4T 2021 frente al 3T 2026. Series anuales: cuarto trimestre o diciembre de cada año, salvo que se indique otra cosa. Comparativas de temporalidad y paro: zona euro. Beneficiarios del SMI 2027: microdatos de la EPA con salarios de 2024.</p>
       <p><strong>Privacidad.</strong> Esta página no usa cookies ni analítica y no envía datos a ningún sitio. Los cálculos derivados (porcentajes de variación) se hacen en tu navegador a partir de las cifras publicadas.</p>
     </div>
   </div>
@@ -692,7 +740,7 @@ var TINT={c:VAR===1?"#FCE9E4":"#E23E27"};
 function barFill(x){var e=eraOf(x);if(e==="c")return VAR===1?"#E23E27":"#C8F04A";return "#D3C8C4";}
 function eraOf(x){x=String(x);if(/^3T/.test(x))return "c";var y=parseInt(x,10);if(y<=2011)return "z";if(y<=2018)return "r";if(y===2019)return "s";return "c";}
 function isYears(xs){return xs.length>0&&xs.every(function(x){return /^(\d{4}|3T \d\d)$/.test(String(x));});}
-function since(cfg,y0){if(!isYears(cfg.x))return;if(!cfg.marker)cfg.marker=["2021","Reforma laboral"];var off=0;while(off<cfg.x.length&&/^\d{4}$/.test(cfg.x[off])&&+cfg.x[off]<y0)off++;if(!off)return;
+function since(cfg,y0){if(!isYears(cfg.x))return;if(!cfg.marker&&!cfg.noMarker)cfg.marker=["2021","Reforma laboral"];var off=0;while(off<cfg.x.length&&/^\d{4}$/.test(cfg.x[off])&&+cfg.x[off]<y0)off++;if(!off)return;
  cfg.x=cfg.x.slice(off);if(cfg.v)cfg.v=cfg.v.slice(off);if(cfg.lab)cfg.lab=cfg.lab.slice(off);if(cfg.series)cfg.series.forEach(function(s){s.v=s.v.slice(off);});
  if(cfg.hi){var h0=cfg.hi;cfg.hi=function(i){return h0(i+off);};}
  if(cfg.labelIdx){var L=[];cfg.labelIdx.forEach(function(i){var j=Math.max(0,i-off);if(L.indexOf(j)<0)L.push(j);});cfg.labelIdx=L;}}
@@ -755,12 +803,14 @@ function barChart(id,cfg){
   ticks.forEach(function(t){el("line",{x1:ml,x2:W-mr,y1:Y(t),y2:Y(t),stroke:C.line},svg);txt(svg,ml-6,Y(t)+4,cfg.yfmt?cfg.yfmt(t):num(t),{"text-anchor":"end"});});
   var every=Math.ceil(n/((W-ml-mr)/40));
   cfg.x.forEach(function(x,i){if(i%every===0||i===n-1){if(i!==n-1&&n-1-i<every)return;txt(svg,X(i)+bw/2,H-mb+15,String(x),{"text-anchor":"middle"});}});
-  cfg.v.forEach(function(v,i){var hl=cfg.hi&&cfg.hi(i);var ts=isYears(cfg.x);var p=el("path",{d:roundedBar(X(i),Y(0),Y(v),bw),fill:ts?barFill(cfg.x[i]):(hl?(cfg.hiColor||C.vermInk):(cfg.hi?"#EF9283":(cfg.color||C.verm)))},svg);
+  cfg.v.forEach(function(v,i){var hl=cfg.hi&&cfg.hi(i);var ts=isYears(cfg.x);var p=el("path",{d:roundedBar(X(i),Y(0),Y(v),bw),fill:ts?barFill(cfg.x[i]):(hl?(cfg.hiColor||C.vermInk):(cfg.hi?(cfg.loColor||"#EF9283"):(cfg.color||C.verm))),stroke:(!ts&&hl&&cfg.hiColor===C.lime)?"rgba(29,20,18,.45)":"none","stroke-width":1},svg);
     var hit=el("rect",{x:ml+i*slot,y:mt-10,width:slot,height:H-mb-mt+10,fill:"transparent"},svg);
     hit.addEventListener("pointermove",function(e){p.setAttribute("opacity",1);showTip(e,'<b>'+cfg.x[i]+'</b>'+(cfg.vname?cfg.vname+": ":"")+'<strong>'+((cfg.lab&&cfg.lab[i])||cfg.fmt(v))+'</strong>');});
     hit.addEventListener("pointerleave",function(){hideTip();});});
+  if(cfg.dash)cfg.dash.forEach(function(i){el("rect",{x:X(i)-2,y:Y(cfg.v[i])-2,width:bw+4,height:Y(0)-Y(cfg.v[i])+2,fill:"none",stroke:C.ink,"stroke-width":1.3,"stroke-dasharray":"4 3"},svg);});
   drawMarker(svg,cfg,function(i){return X(i)+bw/2;},mt,H-mb);
-  var ci=cfg.x.indexOf("2020");if(ci>=0){var inside=!cfg.labelAll&&Y(0)-Y(cfg.v[ci])>40;drawCovid(svg,cfg.x,function(i){return X(i)+bw/2;},function(i){return inside?Y(cfg.v[i])+13:Y(cfg.v[i])-5;},(inside&&!(isYears(cfg.x)&&VAR===2))?"#fff":C.ink,Math.min(9,bw/4.2));}
+  var ci=cfg.noCovid?-1:cfg.x.indexOf("2020");if(ci>=0&&cfg.labelAll){var sL=((cfg.lab&&cfg.lab[ci])||cfg.fmt(cfg.v[ci])).length*6.4+12;if(Y(0)-Y(cfg.v[ci])<sL){txt(svg,X(ci)+bw/2,Y(cfg.v[ci])-sL-8,"COVID",{"text-anchor":"middle","font-size":Math.min(9,bw/4.2),"font-weight":700,fill:C.ink});ci=-1;}}
+  if(ci>=0){var inside=!cfg.labelAll&&Y(0)-Y(cfg.v[ci])>40;drawCovid(svg,cfg.x,function(i){return X(i)+bw/2;},function(i){return inside?Y(cfg.v[i])+13:Y(cfg.v[i])-5;},(inside&&!(isYears(cfg.x)&&VAR===2))?"#fff":C.ink,Math.min(9,bw/4.2));}
   if(cfg.labelAll){cfg.v.forEach(function(v,i){var s=(cfg.lab&&cfg.lab[i])||cfg.fmt(v),cx=X(i)+bw/2+4,len=s.length*6.4+12,ins=Y(0)-Y(v)>=len,yy=ins?Y(v)+7:Y(v)-6;
     var col=ins?(isYears(cfg.x)&&eraOf(cfg.x[i])==="c"?"#fff":C.ink):C.ink;
     txt(svg,cx,yy,s,{"text-anchor":ins?"end":"start",fill:col,"font-weight":700,"font-size":11,transform:"rotate(-90 "+cx+" "+yy+")"});});}
@@ -792,6 +842,14 @@ var BAND=["2020","Ministra Yolanda Díaz"];
 
 /* ---------- Gráficos nacionales ---------- */
 var ocup=[20717900,20055300,18890400,18674900,18153000,17339400,17135200,17569100,18094200,18508100,18998400,19564600,19966900,19344300,20274800,20640700,21389700,21857900,22463300,22852600];
+(function(){var N=143,x=[],a=[],b=[];for(var m=0;m<N;m++){x.push(String(m));a.push(null);b.push(null);}
+ [[0,0],[21,-1458867],[30,-1947039],[54,-2534783],[66,-3313612],[78,-3319441],[90,-2917738],[102,-2388693],[114,-1818876],[126,-1211019],[138,-673750],[142,0]].forEach(function(p){a[p[0]]=p[1]/1e6;});
+ [[0,0],[2,-791562],[15,16992],[18,223495]].forEach(function(p){b[p[0]]=p[1]/1e6;});
+ lineChart("c-crisis",{title:"Salir de la crisis: 11 años y 10 meses frente a 15 meses",cap:"Variación de afiliados a la Seguridad Social respecto al mes de inicio de cada crisis, en millones. La crisis financiera tardó 142 meses en recuperar el empleo perdido; la de la COVID, con los ERTE, 15 meses.",x:x,
+  series:[{name:"Crisis financiera (2008)",short:"Crisis 2008",color:"#B9AFAB",v:a},{name:"Crisis COVID (2020)",short:"COVID",color:C.verm,v:b}],
+  fmt:function(v){return (v>0?"+":v<0?"−":"")+num(Math.abs(v),2)+" M";},yfmt:function(v){return num(v,1)+" M";},endPad:70,
+  src:"Ministerio de Inclusión, Seguridad Social y Migraciones. Puntos clave de la serie mensual; meses desde el inicio de cada crisis."});
+})();
 lineChart("c-ocup",{title:"Personas ocupadas",cap:"Millones. Cuarto trimestre de cada año (2011–2025) y tercer trimestre de 2026.",x:yrs(2007,2025).concat(["3T 26"]),
  series:[{name:"Ocupados",color:C.verm,v:ocup.map(function(v){return v/1e6;})}],fmt:function(v){return num(v,2)+" M";},yfmt:function(v){return num(v,0)+" M";},band:BAND,src:"INE, Encuesta de Población Activa."});
 var erteIds=CCAA.slice().sort(function(a,b){return T[b].erteP-T[a].erteP;});
@@ -814,21 +872,54 @@ var sc=[["Canarias",22.0],["Extremadura",20.7],["Murcia",17.8],["Andalucía",17.
 hbarChart("c-smiccaa",{title:"Quién se beneficia del SMI de 2027, por comunidad",cap:"Porcentaje de personas asalariadas. 2,68 millones en total.",c:sc.map(function(r){return r[0];}),v:sc.map(function(r){return r[1];}),fmt:function(v){return num(v,1)+"%";},hi:function(i,c){return c==="España";},hiColor:C.ink,rh:20,vname:"Beneficiarios",cname:"Comunidad",src:"Microdatos de la EPA con salarios, 2024."});
 hbarChart("c-smimuj",{title:"Dos de cada tres beneficiarios del SMI 2027 son mujeres",cap:"Personas que se benefician de la subida. 65,2% mujeres y 34,8% hombres.",c:["Mujeres","Hombres"],v:[1746000,934000],fmt:function(v){return num(v);},hi:function(i){return i===0;},color:"#EF9283",hiColor:C.verm,vname:"Personas",cname:"Sexo",rh:30,src:"Microdatos de la EPA con salarios, 2024."});
 hbarChart("c-smisexo",{title:"A las mujeres les afecta el doble",cap:"Porcentaje de asalariados de cada sexo que se benefician de la subida.",c:["Mujeres","Hombres"],v:[18.4,9.2],fmt:function(v){return num(v,1)+"%";},hi:function(i){return i===0;},color:"#EF9283",hiColor:C.verm,vname:"Beneficiarios",cname:"Sexo",rh:30,src:"Microdatos de la EPA con salarios, 2024."});
-hbarChart("c-smiedad",{title:"…por edad",cap:"Porcentaje de asalariados de cada grupo que se benefician.",c:["16 a 24 años","25 a 34 años","35 a 44 años","45 a 54 años","55 o más años"],v:[27.2,15.4,13.0,11.5,11.3],fmt:function(v){return num(v,1)+"%";},vname:"Beneficiarios",cname:"Edad",rh:26,src:"Microdatos de la EPA con salarios, 2024."});
-hbarChart("c-smisector",{title:"…y por sector",cap:"Porcentaje de asalariados de cada sector que se benefician.",c:["Agricultura","Servicios","Industria","Construcción"],v:[30.1,15.3,5.8,5.4],fmt:function(v){return num(v,1)+"%";},vname:"Beneficiarios",cname:"Sector",rh:26,src:"Microdatos de la EPA con salarios, 2024."});
 
 lineChart("c-paro",{title:"Tasa de paro: España frente a la zona euro",cap:"Media anual (2025: dato de diciembre).",x:yrs(2005,2025),
  series:[{name:"España",color:C.verm,v:[9.2,8.5,8.2,11.3,17.9,19.9,21.4,24.8,26.1,24.5,22.1,19.6,17.2,15.3,14.1,15.5,15.0,13.1,12.3,11.4,10.0]},{name:"Zona euro",short:"Zona euro",color:C.eu,v:[9.1,8.4,7.5,7.5,9.6,10.1,10.2,11.4,12.0,11.7,10.9,10.1,9.1,8.2,7.5,7.9,7.8,6.8,6.6,6.4,6.2]}],
  fmt:function(v){return num(v,1)+"%";},yfmt:function(v){return v+"%";},yMin:0,band:BAND,src:"Eurostat."});
 barChart("c-cob",{title:"Cobertura de la prestación por desempleo",cap:"Porcentaje de personas paradas que reciben una prestación. Diciembre de cada año.",x:yrs(2005,2025),v:[65.7,70.0,73.7,76.5,80.0,77.4,69.8,64.0,61.4,57.6,55.2,56.6,58.6,60.4,65.3,63.3,62.6,68.7,72.2,78.1,79.1],fmt:function(v){return num(v,1)+"%";},yfmt:function(v){return v+"%";},band:BAND,labelIdx:[10,20],vname:"Cobertura",src:"Ministerio de Trabajo y Economía Social."});
 
-var py=yrs(2007,2026);
-var ptot=[17.9,17.9,17.9,17.9,17.9,17.9,17.9,17.9,17.9,17.9,20,21,24,28,32,32,32,32,34,38];
-var ppad=[1.86,1.86,1.86,1.86,1.86,1.86,1.86,1.86,1.86,1.86,4,5,8,12,16,16,16,16,17,19];
-barChart("c-perm-tot",{labelAll:true,title:"Permisos por nacimiento: total de semanas (madre + padre)",cap:"Semanas retribuidas vigentes a final de cada año.",x:py,v:ptot,fmt:function(v){return num(v,1).replace(",0","")+" sem.";},yfmt:function(v){return v;},band:BAND,labelIdx:[0,19],vname:"Semanas",src:"BOE y Seguridad Social. 2026: 17 + 2 semanas por progenitor para cuidado hasta los 8 años."});
-barChart("c-perm-pad",{labelAll:true,title:"Permiso del padre o segundo progenitor",cap:"Semanas retribuidas vigentes a final de cada año.",x:py,v:ppad,lab:ppad.map(function(v){return v<2?"13 días":num(v)+" sem.";}),fmt:function(v){return num(v)+" sem.";},yfmt:function(v){return v;},band:BAND,labelIdx:[0,19],vname:"Permiso",src:"BOE y Seguridad Social. Hasta 2016: 13 días."});
+function stackChart(id,cfg){
+ var fig=document.getElementById(id); if(!fig)return;
+ cfg.table={head:["Año"].concat(cfg.names).concat(["Total"]),rows:cfg.x.map(function(x,i){return [x,cfg.fmtS(cfg.a[i],0),cfg.fmtS(cfg.b[i],1),cfg.fmtT(cfg.a[i]+cfg.b[i])];})};
+ var plot=frame(fig,cfg);
+ var lg=document.createElement("div");lg.className="legend-inline";lg.innerHTML='<span class="sw2" style="--c:#B8ABA6;--d:#E23E27">'+cfg.names[1]+' <small>(oscuro)</small></span><span class="sw2" style="--c:#E4DCD9;--d:#F3A497">'+cfg.names[0]+' <small>(claro)</small></span>';
+ fig.insertBefore(lg,plot);
+ register(function(){
+  plot.innerHTML="";
+  var W=Math.max(300,plot.clientWidth||560),H=W<480?250:290,ml=40,mr=8,mt=36,mb=26;
+  var tot=cfg.a.map(function(v,i){return v+cfg.b[i];});var ticks=niceTicks(0,Math.max.apply(null,tot)*1.08,4);var lo=0,hi=ticks[ticks.length-1];
+  var n=cfg.x.length,slot=(W-ml-mr)/n,bw=Math.max(2,slot-4),X=function(i){return ml+i*slot+(slot-bw)/2;},Y=function(v){return mt+(H-mt-mb)*(1-(v-lo)/(hi-lo));};
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":cfg.title},plot);
+  drawEras(svg,cfg.x,function(i){return ml+i*slot;},function(i){return ml+(i+1)*slot;},2,H-mb);
+  ticks.forEach(function(t){el("line",{x1:ml,x2:W-mr,y1:Y(t),y2:Y(t),stroke:C.line},svg);txt(svg,ml-6,Y(t)+4,num(t),{"text-anchor":"end"});});
+  var every=Math.ceil(n/((W-ml-mr)/40));
+  cfg.x.forEach(function(x,i){if(i%every===0||i===n-1){if(i!==n-1&&n-1-i<every)return;txt(svg,X(i)+bw/2,H-mb+15,String(x),{"text-anchor":"middle"});}});
+  drawMarker(svg,cfg,function(i){return X(i)+bw/2;},mt,H-mb);
+  cfg.x.forEach(function(x,i){var co=eraOf(x)==="c",a=cfg.a[i],b=cfg.b[i],cx=X(i)+bw/2;
+   var ra=el("rect",{x:X(i),y:Y(a),width:bw,height:Y(0)-Y(a),fill:co?"#F3A497":"#E4DCD9"},svg);
+   var pb=el("path",{d:roundedBar(X(i),Y(a)-1.5,Y(a+b),bw),fill:co?"#E23E27":"#B8ABA6"},svg);
+   el("line",{x1:X(i),x2:X(i)+bw,y1:Y(a)-.75,y2:Y(a)-.75,stroke:"#fff","stroke-width":1.5},svg);
+   if(cfg.dash&&cfg.dash.indexOf(i)>=0)el("rect",{x:X(i)-2,y:Y(a+b)-2,width:bw+4,height:Y(0)-Y(a+b)+2,fill:"none",stroke:C.ink,"stroke-width":1.3,"stroke-dasharray":"4 3"},svg);
+   var fs=Math.min(11,bw/2.4);
+   if(Y(0)-Y(a)>16)txt(svg,cx,(Y(0)+Y(a))/2+4,cfg.fmtS(a,0,true),{"text-anchor":"middle",fill:C.ink,"font-weight":700,"font-size":fs});
+   if(Y(a)-Y(a+b)>16)txt(svg,cx,(Y(a)+Y(a+b))/2+4,cfg.fmtS(b,1,true),{"text-anchor":"middle",fill:co?"#fff":C.ink,"font-weight":700,"font-size":fs});
+   if(slot>=26||i===n-1||i===0)txt(svg,cx,Y(a+b)-6,cfg.fmtT(a+b),{"text-anchor":"middle",fill:C.ink,"font-weight":800,"font-size":Math.min(12.5,bw/2.2),stroke:"rgba(255,255,255,.9)","stroke-width":3,"paint-order":"stroke"});
+   var hit=el("rect",{x:ml+i*slot,y:mt-10,width:slot,height:H-mb-mt+10,fill:"transparent"},svg);
+   hit.addEventListener("pointermove",function(e){showTip(e,'<b>'+x+(cfg.notes&&cfg.notes[x]?' · '+cfg.notes[x]:'')+'</b>'+cfg.names[0]+': <strong>'+cfg.fmtS(a,0)+'</strong><br>'+cfg.names[1]+': <strong>'+cfg.fmtS(b,1)+'</strong><br>Total: <strong>'+cfg.fmtT(a+b)+'</strong>');});
+   hit.addEventListener("pointerleave",hideTip);});
+ });
+}
+var py=yrs(2011,2027);
+var pmad=[16,16,16,16,16,16,16,16,16,16,16,16,16,16,17,19,20];
+var ppad=[1.86,1.86,1.86,1.86,1.86,1.86,4,5,8,12,16,16,16,16,17,19,20];
+stackChart("c-perm-tot",{title:"Permisos por nacimiento: semanas de la madre y del padre",cap:"Semanas retribuidas vigentes a final de cada año. 2027: 20 semanas por progenitor (RDL 42/2026), disfrutables desde el 1 de marzo de 2027.",x:py,a:pmad,b:ppad,names:["Madre","Padre o segundo progenitor"],dash:[16],notes:{"2026":"17 + 2 semanas de cuidado hasta los 8 años","2027":"RDL 42/2026, desde el 1 de marzo"},
+ fmtS:function(v,k,short){return k===1&&v<2?(short?"13 d.":"13 días"):num(v)+(short?"":" semanas");},fmtT:function(v){return num(v,v%1?1:0);},src:"BOE (Estatuto de los Trabajadores; RDL 6/2019, 9/2025 y 42/2026) y Seguridad Social."});
+var dy=yrs(2011,2026),dv=dy.map(function(y){return y==="2026"?10:2;});
+barChart("c-duelo",{labelAll:true,noMarker:true,noCovid:true,title:"Permiso por fallecimiento de un familiar directo",cap:"Días laborables retribuidos por fallecimiento del cónyuge, la pareja, el padre, la madre o un hijo. Hasta 2025: 2 días (4 con desplazamiento), sin cambios desde 1980. Desde el 26 de noviembre de 2026: 10 días.",x:dy,v:dv,lab:dv.map(function(v){return v+" días";}),fmt:function(v){return v+" días";},yfmt:function(v){return v;},dash:[15],vname:"Permiso",src:"BOE (Estatuto de los Trabajadores, art. 37.3; RDL 42/2026)."});
 
-barChart("c-deciles",{title:"Subida salarial por decil, 2018–2024",cap:"Variación del salario del empleo principal. Decil 1: el 10% peor pagado.",x:["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"],xname:"Decil",v:[48.0,41.6,28.7,23.9,22.1,21.5,21.3,20.3,18.7,19.6],fmt:function(v){return "+"+num(v,1)+"%";},yfmt:function(v){return v+"%";},hi:function(i){return i<2;},labelIdx:[0,1],refLine:[22.7,"Media +22,7%"],vname:"Subida",src:"INE, EPA. Salarios del empleo principal."});
+barChart("c-salmedio",{title:"Salario medio mensual bruto",cap:"Euros al mes del empleo principal. 2025: 2.497,2 €, un 4,7% más que en 2024 y el noveno año seguido de subida.",x:yrs(2011,2025),v:[1841.5,1850.2,1869.0,1881.2,1893.6,1878.0,1888.9,1944.3,1982.2,2038.5,2076.3,2118.5,2273.0,2385.1,2497.2],fmt:function(v){return num(v,1)+" €";},yfmt:function(v){return num(v)+" €";},labelIdx:[0,7,14],vname:"Salario medio",noMarker:false,src:"INE, EPA. Decil de salarios del empleo principal (media de los diez deciles)."});
+barChart("c-deciles",{title:"Subida salarial por decil, 2018–2025",cap:"Variación nominal del salario medio de cada decil del empleo principal. Decil 1: el 10% peor pagado. La inflación acumulada en el periodo fue del 22,5%.",x:["Media","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"],xname:"Decil",v:[28.4,47.8,43.5,32.6,28.9,27.4,27.1,28.2,28.3,26.7,24.7],fmt:function(v){return "+"+num(v,1)+"%";},yfmt:function(v){return v+"%";},hi:function(i){return i===0;},hiColor:C.lime,loColor:C.verm,labelIdx:[0,1,2,3,4,5,6,7,8,9,10],vname:"Subida",src:"INE, EPA. Decil de salarios del empleo principal, 2025."});
+barChart("c-salreal",{title:"Subida del salario real por decil, 2018–2025",cap:"Variación descontada la inflación acumulada (22,5%). El 10% peor pagado gana un 20,6% más en términos reales.",x:["Media","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"],xname:"Decil",v:[4.8,20.6,17.1,8.2,5.2,3.9,3.7,4.6,4.7,3.4,1.7],fmt:function(v){return "+"+num(v,1)+"%";},yfmt:function(v){return v+"%";},hi:function(i){return i===0;},hiColor:C.lime,loColor:C.verm,labelIdx:[0,1,2,3,4,5,6,7,8,9,10],vname:"Subida real",src:"INE, EPA. Decil de salarios del empleo principal, e IPC."});
 lineChart("c-brecha",{title:"Brecha salarial de género por hora trabajada",cap:"España frente a la UE. Porcentaje.",x:yrs(2016,2024),
  series:[{name:"España",color:C.verm,v:[14.8,13.5,11.9,9.6,9.3,9.3,9.2,7.3,7.3]},{name:"Unión Europea",short:"UE",color:C.eu,v:[15.1,14.6,14.4,13.7,12.7,12.3,12.2,11.7,11.1]}],
  fmt:function(v){return num(v,1)+"%";},yfmt:function(v){return v+"%";},yMin:0,band:BAND,src:"Eurostat."});
@@ -852,6 +943,7 @@ var NORMAS=[
  ["2023","RDL 5/2023 · Permisos de conciliación","5 días por cuidado de familiares, 4 días por fuerza mayor y 8 semanas de permiso parental."],
  ["2024","RDL 2/2024 · Subsidios por desempleo","Más cuantía, más colectivos protegidos y compatibilidad del subsidio con un empleo."],
  ["2025","RDL 9/2025 · Permiso por nacimiento","19 semanas retribuidas por progenitor (32 en familias monoparentales)."],
+ ["2026","RDL 42/2026 · Permisos por nacimiento y por duelo","Permiso por nacimiento de 20 semanas por progenitor (34 en monoparentales). Permiso por duelo de 10 días laborables por fallecimiento del cónyuge, la pareja, el padre, la madre o un hijo (3 días, o 5 con desplazamiento, para el resto de familiares hasta segundo grado). Nuevo permiso de un día para acompañar en la prestación de ayuda para morir."],
  ["2020–2027","Reales decretos anuales del SMI","De 900 € en 2019 a 1.286 € en 2027 (RD 1013/2026). Subida del 75% desde 2018."]
 ];
 document.getElementById("normas-b").innerHTML=NORMAS.map(function(r){return '<tr><td>'+r[0]+'</td><td><strong>'+r[1]+'</strong></td><td>'+r[2]+'</td></tr>';}).join("");
