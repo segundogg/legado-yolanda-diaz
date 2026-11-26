@@ -761,7 +761,7 @@ function niceTicks(lo,hi,n){var span=hi-lo||1;var step=Math.pow(10,Math.floor(Ma
 function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
 function txt(parent,x,y,s,attrs){var a={x:x,y:y,"font-size":11.5,fill:C.muted,"font-family":"Marr Sans, system-ui, sans-serif"};for(var k in attrs)a[k]=attrs[k];var t=el("text",a,parent);t.textContent=s;return t;}
 function frame(fig,cfg){
- fig.innerHTML='<h3>'+cfg.title+'</h3>'+(cfg.cap?'<p class="cap">'+cfg.cap+'</p>':"")+(cfg.legend?'<div class="legend-inline">'+cfg.legend.map(function(l){return '<span style="--c:'+l[1]+'">'+l[0]+'</span>';}).join("")+'</div>':"")+(isYears(cfg.x||[])?'<div class="eras"><span style="--c:#F3B9AE">PSOE</span><span style="--c:#B4C8E6">PP</span><span style="--c:#E23E27">Coalición con Yolanda Díaz</span></div>':"")+'<div class="plot"></div><p class="src">Fuente: '+cfg.src+'</p>';
+ fig.innerHTML='<h3>'+cfg.title+'</h3>'+(cfg.cap?'<p class="cap">'+cfg.cap+'</p>':"")+(cfg.legend?'<div class="legend-inline">'+cfg.legend.map(function(l){return '<span style="--c:'+l[1]+'">'+l[0]+'</span>';}).join("")+'</div>':"")+(isYears(cfg.x||[])?'<div class="eras"><span style="--c:#F3B9AE">PSOE</span><span style="--c:#B4C8E6">PP</span><span style="--c:#E23E27">Coalición</span></div>':"")+'<div class="plot"></div><p class="src">Fuente: '+cfg.src+'</p>';
  if(cfg.table){var t=cfg.table;var d=document.createElement("details");d.innerHTML='<summary>Ver los datos</summary><div class="tbl-wrap"><table><thead><tr>'+t.head.map(function(h,i){return '<th'+(i?' class="n"':"")+'>'+h+'</th>';}).join("")+'</tr></thead><tbody>'+t.rows.map(function(r){return '<tr>'+r.map(function(c,i){return '<td'+(i?' class="n"':"")+'>'+c+'</td>';}).join("")+'</tr>';}).join("")+'</tbody></table></div>';fig.appendChild(d);}
  return fig.querySelector(".plot");
 }
@@ -769,7 +769,7 @@ var REG=[];
 function register(fn){REG.push(fn);fn();}
 var rt;window.addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){REG.forEach(function(f){f();});},150);});
 
-var VAR=1;var ERAS={z:{bg:"#F3B9AE",fg:"#7A1B0E",l:"Zapatero · PSOE",s:"PSOE"},r:{bg:"#B4C8E6",fg:"#1E3F73",l:"Rajoy · PP",s:"PP"},s:{bg:"#F3B9AE",fg:"#7A1B0E",l:"Sánchez · PSOE",s:"PSOE"},c:{bg:"#E23E27",fg:"#C8F04A",l:"Coalición · Yolanda Díaz",s:"Coalición"}};
+var VAR=1;var ERAS={z:{bg:"#F3B9AE",fg:"#7A1B0E",l:"Zapatero · PSOE",s:"PSOE"},r:{bg:"#B4C8E6",fg:"#1E3F73",l:"Rajoy · PP",s:"PP"},s:{bg:"#F3B9AE",fg:"#7A1B0E",l:"Sánchez · PSOE",s:"PSOE"},c:{bg:"#E23E27",fg:"#C8F04A",l:"Coalición",s:"Coalición"}};
 var TINT={c:VAR===1?"#FCE9E4":"#E23E27"};
 function barFill(x){var e=eraOf(x);if(e==="c")return VAR===1?"#E23E27":"#C8F04A";return "#D3C8C4";}
 function eraOf(x){x=String(x);if(/^3T/.test(x))return "c";var y=parseInt(x,10);if(y<=2011)return "z";if(y<=2018)return "r";if(y===2019)return "s";return "c";}
