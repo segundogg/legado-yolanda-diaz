@@ -746,7 +746,7 @@ function renderMap(){
  h+='<div class="canlbl">Canarias</div>';
  var mp=document.getElementById("tmap"); mp.innerHTML=h;
  mp.onclick=function(e){var b=e.target.closest("button[data-t]"); if(b) select(b.dataset.t,true);};
- mp.onmousemove=function(e){var b=e.target.closest("button[data-t]"); if(!b){hideTip();return;} var t=T[b.dataset.t]; showTip(e,'<b>'+esc(t.name)+'</b>'+esc(m.label)+': '+esc(m.fmt(m.get(t)))+'<br><span style="opacity:.75">España: '+esc(m.fmt(m.get(T.es)))+'</span>');};
+ mp.onmousemove=function(e){ if(NOHOVER){hideTip();return;}var b=e.target.closest("button[data-t]"); if(!b){hideTip();return;} var t=T[b.dataset.t]; showTip(e,'<b>'+esc(t.name)+'</b>'+esc(m.label)+': '+esc(m.fmt(m.get(t)))+'<br><span style="opacity:.75">España: '+esc(m.fmt(m.get(T.es)))+'</span>');};
  mp.onmouseleave=hideTip;
  var lg=document.getElementById("mlegend");
  if(m.ramp==="div") lg.innerHTML='<span><span class="sw" style="background:#3D7300"></span>Baja el paro</span><span><span class="sw" style="background:#EFE8E5"></span>Sin cambio</span><span><span class="sw" style="background:#C2301B"></span>Sube el paro</span>';
@@ -768,6 +768,9 @@ function renderMap(){
 var tipEl=document.getElementById("tip");
 function showTip(e,html){tipEl.innerHTML=html;tipEl.style.opacity=1;var x=e.clientX+14,y=e.clientY+14;var w=tipEl.offsetWidth,hh=tipEl.offsetHeight;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+hh>innerHeight-8)y=e.clientY-hh-14;tipEl.style.left=x+"px";tipEl.style.top=y+"px";}
 function hideTip(){tipEl.style.opacity=0;}
+var NOHOVER=window.matchMedia&&matchMedia("(hover: none)").matches,tipT=0;
+window.addEventListener("scroll",hideTip,{passive:true});
+document.addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse"){clearTimeout(tipT);tipT=setTimeout(hideTip,2200);}},{passive:true});
 
 /* ---------- Motor de gráficos (SVG) ---------- */
 var NS="http://www.w3.org/2000/svg";
@@ -860,7 +863,7 @@ function barChart(id,cfg){
   drawMarker(svg,cfg,function(i){return X(i)+bw/2;},mt,H-mb);
   var ci=cfg.noCovid?-1:cfg.x.indexOf("2020");if(ci>=0&&cfg.labelAll){var sL=((cfg.lab&&cfg.lab[ci])||cfg.fmt(cfg.v[ci])).length*6.4+12;if(Y(0)-Y(cfg.v[ci])<sL){txt(svg,X(ci)+bw/2,Y(cfg.v[ci])-sL-8,"COVID",{"text-anchor":"middle","font-size":Math.min(9,bw/4.2),"font-weight":700,fill:C.ink});ci=-1;}}
   if(ci>=0){var inside=!cfg.labelAll&&Y(0)-Y(cfg.v[ci])>40;drawCovid(svg,cfg.x,function(i){return X(i)+bw/2;},function(i){return inside?Y(cfg.v[i])+13:Y(cfg.v[i])-5;},(inside&&!(isYears(cfg.x)&&VAR===2))?"#fff":C.ink,Math.min(9,bw/4.2));}
-  if(cfg.labelAll){cfg.v.forEach(function(v,i){var s=(cfg.lab&&cfg.lab[i])||cfg.fmt(v),cx=X(i)+bw/2+4,len=s.length*6.4+12,ins=Y(0)-Y(v)>=len,yy=ins?Y(v)+7:Y(v)-6;
+  if(cfg.labelAll){cfg.v.forEach(function(v,i){if(cfg.labIf&&!cfg.labIf(v,i))return;var s=(cfg.lab&&cfg.lab[i])||cfg.fmt(v),cx=X(i)+bw/2+4,len=s.length*6.4+12,ins=Y(0)-Y(v)>=len,yy=ins?Y(v)+7:Y(v)-6;
     var col=ins?(isYears(cfg.x)&&eraOf(cfg.x[i])==="c"?"#fff":C.ink):C.ink;
     txt(svg,cx,yy,s,{"text-anchor":ins?"end":"start",fill:col,"font-weight":700,"font-size":11,transform:"rotate(-90 "+cx+" "+yy+")"});});}
   else (cfg.labelIdx||[n-1]).forEach(function(i){txt(svg,i===0?X(i):i===n-1?X(i)+bw:X(i)+bw/2,Y(cfg.v[i])-5,(cfg.lab&&cfg.lab[i])||cfg.fmt(cfg.v[i]),{"text-anchor":i===n-1?"end":i===0?"start":"middle",fill:C.ink,"font-weight":700,"font-size":12,stroke:"rgba(255,255,255,.9)","stroke-width":3,"paint-order":"stroke","stroke-linejoin":"round"});});
@@ -964,7 +967,7 @@ var ppad=[1.86,1.86,1.86,1.86,1.86,1.86,4,5,8,12,16,16,16,16,17,19,20];
 stackChart("c-perm-tot",{title:"Permisos por nacimiento: semanas de la madre y del padre",cap:"Semanas retribuidas vigentes a final de cada año. 2027: 20 semanas por progenitor (RDL 42/2026), disfrutables desde el 1 de marzo de 2027.",x:py,a:pmad,b:ppad,names:["Madre","Padre o segundo progenitor"],dash:[16],notes:{"2026":"17 + 2 semanas de cuidado hasta los 8 años","2027":"RDL 42/2026, desde el 1 de marzo"},
  fmtS:function(v,k,short){return k===1&&v<2?(short?"13 d.":"13 días"):num(v)+(short?"":" semanas");},fmtT:function(v){return num(v,v%1?1:0);},src:"BOE (Estatuto de los Trabajadores; RDL 6/2019, 9/2025 y 42/2026) y Seguridad Social."});
 var dy=yrs(2011,2026),dv=dy.map(function(y){return y==="2026"?10:2;});
-barChart("c-duelo",{labelAll:true,noMarker:true,noCovid:true,title:"Permiso por fallecimiento de un familiar directo",cap:"Días laborables retribuidos por fallecimiento del cónyuge, la pareja, el padre, la madre o un hijo. Hasta 2025: 2 días (4 con desplazamiento), sin cambios desde 1980. Desde el 26 de noviembre de 2026: 10 días.",x:dy,v:dv,lab:dv.map(function(v){return v+" días";}),fmt:function(v){return v+" días";},yfmt:function(v){return v;},dash:[15],vname:"Permiso",src:"BOE (Estatuto de los Trabajadores, art. 37.3; RDL 42/2026)."});
+barChart("c-duelo",{labelAll:true,noMarker:true,noCovid:true,title:"Permiso por fallecimiento de un familiar directo",cap:"Días laborables retribuidos por fallecimiento del cónyuge, la pareja, el padre, la madre o un hijo. Hasta 2025: 2 días (4 con desplazamiento), sin cambios desde 1980. Desde el 26 de noviembre de 2026: 10 días.",x:dy,v:dv,labIf:function(v){return v>=10;},fmt:function(v){return v+" días";},yfmt:function(v){return v;},dash:[15],vname:"Permiso",src:"BOE (Estatuto de los Trabajadores, art. 37.3; RDL 42/2026)."});
 
 barChart("c-salmedio",{title:"Salario medio mensual bruto",cap:"Euros al mes del empleo principal. 2025: 2.497,2 €, un 4,7% más que en 2024 y el noveno año seguido de subida.",x:yrs(2011,2025),v:[1841.5,1850.2,1869.0,1881.2,1893.6,1878.0,1888.9,1944.3,1982.2,2038.5,2076.3,2118.5,2273.0,2385.1,2497.2],fmt:function(v){return num(v,1)+" €";},yfmt:function(v){return num(v)+" €";},labelIdx:[0,7,14],vname:"Salario medio",noMarker:false,src:"INE, EPA. Decil de salarios del empleo principal (media de los diez deciles)."});
 barChart("c-deciles",{title:"Subida salarial por decil, 2018–2025",cap:"Variación nominal del salario medio de cada decil del empleo principal. Decil 1: el 10% peor pagado. La inflación acumulada en el periodo fue del 22,5%.",x:["Media","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"],xname:"Decil",v:[28.4,47.8,43.5,32.6,28.9,27.4,27.1,28.2,28.3,26.7,24.7],fmt:function(v){return "+"+num(v,1)+"%";},yfmt:function(v){return v+"%";},hi:function(i){return i===0;},hiColor:C.lime,loColor:C.verm,labelIdx:[0,1,2,3,4,5,6,7,8,9,10],vname:"Subida",src:"INE, EPA. Decil de salarios del empleo principal, 2025."});
@@ -1007,7 +1010,7 @@ renderMapTabs(); select("es",false);
 <script>
 (function(){
  var sn=document.getElementById("snav"),hn=document.querySelector(".hero .nav"); if(!sn||!hn||!("IntersectionObserver" in window))return;
- new IntersectionObserver(function(e){var on=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;sn.classList.toggle("on",on);sn.setAttribute("aria-hidden",on?"false":"true");},{threshold:0}).observe(hn);
+ new IntersectionObserver(function(e){var on=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;sn.classList.toggle("on",on);sn.setAttribute("aria-hidden",on?"false":"true");if(on){var c=sn.querySelector("a.cur"),box=sn.querySelector(".in");if(c)box.scrollLeft=c.offsetLeft-box.clientWidth/2+c.offsetWidth/2;}},{threshold:0}).observe(hn);
  var links=[].slice.call(sn.querySelectorAll("a")),secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});
  function cur(){var y=window.scrollY+90,k=-1;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top+window.scrollY<=y)k=i;});
   links.forEach(function(a,i){var c=i===k;if(a.classList.contains("cur")!==c){a.classList.toggle("cur",c);if(c&&sn.classList.contains("on")){var box=sn.querySelector(".in");box.scrollTo({left:a.offsetLeft-box.clientWidth/2+a.offsetWidth/2,behavior:"smooth"});}}});}
